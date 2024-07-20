@@ -11,7 +11,7 @@ function InputBox(props){
 
     return <div className="form-group">
     <label htmlFor={props.name}>{props.label}</label>
-    <input onChange={handleChange} type="text" className="form-control" maxLength={50}  name={props.name} value={props.value}/>
+    <input onChange={handleChange} type={props.type} className="form-control" maxLength={50}  name={props.name} value={props.value}/>
 </div>
 }
 

@@ -22,8 +22,8 @@ function LogInPage(){
         <div className="card">
             <h2>Create Acount</h2>
             <form >
-                <InputBox name="email" label="Email" updateField={updateUser} value={user.email}/>
-                <InputBox name="password" label="Password" updateField={updateUser} value={user.password}/>
+                <InputBox name="email" label="Email" type="text" updateField={updateUser} value={user.email}/>
+                <InputBox name="password" label="Password" type="password" updateField={updateUser} value={user.password}/>
                 <button type="submit" className="btn">Sign In</button>
                 <div class="divider">
                     <p >or</p>

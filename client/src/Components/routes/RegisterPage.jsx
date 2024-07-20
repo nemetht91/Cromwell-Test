@@ -26,11 +26,11 @@ function RegisterPage(){
         <div className="card">
             <h2>Create Acount</h2>
             <form action="/register" method="POST">
-                <InputBox name="firstName" label="Fisrt Name" updateField={updateUser} value={user.firstName}/>
-                <InputBox name="lastName" label="Last Name" updateField={updateUser} value={user.lastName}/>
-                <InputBox name="email" label="Email" updateField={updateUser} value={user.email}/>
-                <InputBox name="password" label="Password" updateField={updateUser} value={user.password}/>
-                <InputBox name="confirmPassword" label="Confirm Password" updateField={updateUser} value={user.confirmPassword}/>
+                <InputBox name="firstName" label="Fisrt Name" type="text" updateField={updateUser} value={user.firstName}/>
+                <InputBox name="lastName" label="Last Name" type="text" updateField={updateUser} value={user.lastName}/>
+                <InputBox name="email" label="Email" type="text" updateField={updateUser} value={user.email}/>
+                <InputBox name="password" label="Password" type="password" updateField={updateUser} value={user.password}/>
+                <InputBox name="confirmPassword" label="Confirm Password" type="password" updateField={updateUser} value={user.confirmPassword}/>
                 <button type="submit" className="btn">Register</button>
               </form>
         </div>
