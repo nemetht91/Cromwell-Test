@@ -87,6 +87,39 @@ app.post('/user/register', async(req, res) => {
         );
 })
 
+app.post('/user/login', async(req, res) => {
+    const email = req.query.email;
+    const password = req.query.password;
+
+    const user = await usersDbModel.getUser(email);
+    
+    if(user == null){
+        res.status(404).json(
+            {
+                message: "Invalid eamil"
+            }
+        )
+        return;
+    }
+
+    if(await isPasswordValid(user.password, password)){
+        res.status(200).json(
+            {
+                firstName: user.first_name,
+                lastName: user.last_name,
+                email: user.email
+            }
+        )
+        return;
+    }
+
+    res.status(404).json(
+        {
+            message: "Incorrect password"
+        }
+    )
+})
+
 
 async function hashPassword(password){
     try {
@@ -96,6 +129,17 @@ async function hashPassword(password){
       console.log("Error during hashing:", error);
       return null;
     }
+  }
+
+  async function isPasswordValid(storedPassword, password){
+    try {
+      var result = await bcrypt.compare(password, storedPassword);
+      return result;
+    } catch (error) {
+      console.log("Incorrect password!");
+      return false;    
+    }
+    
   }
 
 app.listen(port, () => {
