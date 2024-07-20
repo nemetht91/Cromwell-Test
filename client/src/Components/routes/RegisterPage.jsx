@@ -1,17 +1,36 @@
 import React from "react";
 import InputBox from "../Form/Inputbox";
+import { useState } from "react";
 
 function RegisterPage(){
+
+    const [user, setUser] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "" 
+    });
+
+    function updateUser(inputName, newValue){
+        setUser((preValue) =>{
+            return{
+                ...preValue,
+                [inputName]: newValue
+            }
+        })
+    }
+
 
     return <div className="register page">
         <div className="card">
             <h2>Create Acount</h2>
             <form action="/register" method="POST">
-                <InputBox name="firstName" label="Fisrt Name"/>
-                <InputBox name="lastName" label="Last Name"/>
-                <InputBox name="email" label="Email"/>
-                <InputBox name="password" label="Password"/>
-                <InputBox name="confirmPassword" label="Confirm Password"/>
+                <InputBox name="firstName" label="Fisrt Name" updateField={updateUser} value={user.firstName}/>
+                <InputBox name="lastName" label="Last Name" updateField={updateUser} value={user.lastName}/>
+                <InputBox name="email" label="Email" updateField={updateUser} value={user.email}/>
+                <InputBox name="password" label="Password" updateField={updateUser} value={user.password}/>
+                <InputBox name="confirmPassword" label="Confirm Password" updateField={updateUser} value={user.confirmPassword}/>
                 <button type="submit" className="btn">Register</button>
               </form>
         </div>
