@@ -41,7 +41,8 @@
   color: white;
 }
 
-.navbutton:hover{
+.navbutton:hover,
+.logo:hover{
   color: var(--primary-color);
   cursor: pointer;
 }
