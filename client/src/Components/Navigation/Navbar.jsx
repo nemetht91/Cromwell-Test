@@ -8,9 +8,11 @@ function Navbar(){
     const navigate = useNavigate();
 
     return <div className="navbar">
-        <Logo navigate={() => {navigate('/')}}/>
-        <div className="buttons">
-            <NavButton navigate={() => {navigate('/login')}} name="Sign In"/>
+        <div className="container">
+            <Logo navigate={() => {navigate('/')}}/>
+            <div className="buttons">
+                <NavButton navigate={() => {navigate('/login')}} name="Sign In"/>
+            </div>
         </div>
     </div>
 }
