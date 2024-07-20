@@ -132,3 +132,16 @@ footer a:hover{
 a.btn:hover{
   color: white;
 }
+
+.divider {
+  display: flex;
+  align-items: center;
+}
+
+.divider::before, .divider::after {
+  flex: 1;
+  content: '';
+  padding: 0.5px;
+  background-color: black;
+  margin: 7.5px;
+}
