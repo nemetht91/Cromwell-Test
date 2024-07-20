@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom'
 
 import Navbar from './Components/Navigation/Navbar';
+import Footer from './Components/Footer'
 import HomePage from './Components/routes/HomePage'
 import LogInPage from './Components/routes/LoginPage'
 import RegisterPage from './Components/routes/RegisterPage'
@@ -22,6 +23,7 @@ function App() {
               <Route path="/register" element={<RegisterPage/>} />
               <Route path="/landing" element={<LandingPage/>} />
           </Routes>
+        <Footer/>
       </BrowserRouter>
     </div>
   );
