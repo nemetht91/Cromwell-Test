@@ -31,7 +31,7 @@ class UsersDbModel {
             "INSERT INTO users (email, password, first_name, last_name) VALUES ($1, $2, $3, $4) RETURNING *", [email, password, firstName, lastName]
         );
         if (this.isResult(result)){
-            return result;
+            return result[0];
         }
         return null;
     }
