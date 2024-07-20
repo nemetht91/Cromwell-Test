@@ -70,3 +70,65 @@ footer a{
 footer a:hover{
   color: var(--primary-color);
 }
+
+/* Forms */
+
+.login ,
+.register{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+   padding-top: 150px;
+   text-align: left;
+}
+
+.card{
+  border: var(--primary-color) 0.5px solid;
+  padding: 20px;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.form-group{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 10px 0px;
+  font-size: 1rem;
+}
+
+.login .form-group input,
+.register .form-group input,
+.create .form-group input{
+  font-size: 1rem;
+  padding: 5px;
+  width: 300px;
+}
+
+.form-group textarea{
+  font-size: 1rem;
+  padding: 5px;
+}
+
+.btn{
+  background-color: var(--primary-color);
+  color: white;
+  padding: 7.5px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 3px;
+  margin: 10px 0px;
+  text-align: center;
+  width: 100%;
+}
+
+.btn:hover{
+  cursor: pointer;
+
+}
+
+a.btn:hover{
+  color: white;
+}
