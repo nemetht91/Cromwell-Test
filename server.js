@@ -29,20 +29,26 @@ app.use(cors());
 
 app.get('/user', async(req, res) => {
     const email = req.query.email;
-    const user = await usersDbModel.getUser(email);
-    if(user == null){
-        res.status(404).json({
-            message: "User not found"
-        })
-    }else{
-        res.status(200).json(
-            {
-                firstName: user.first_name,
-                lastName: user.last_name,
-                email: user.email
-            }
-        );
+
+    try {
+        const user = await usersDbModel.getUser(email);
+        if(user == null){
+            res.status(404).json({
+                message: "User not found"
+            })
+        }else{
+            res.status(200).json(
+                {
+                    firstName: user.first_name,
+                    lastName: user.last_name,
+                    email: user.email
+                }
+            );
+        }
+    } catch (error) {
+        res.status(500).json({});
     }
+    
 })
 
 app.post('/user/register', async(req, res) => {
@@ -51,14 +57,20 @@ app.post('/user/register', async(req, res) => {
     const firstName = req.query.firstName;
     const lastName = req.query.lastName;
 
-    if(await usersDbModel.isEmailUsed(email)){
-        res.status(409).json(
-            {
-                message: "Email already used"
-            }
-        )
+    try {
+        if(await usersDbModel.isEmailUsed(email)){
+            res.status(409).json(
+                {
+                    message: "Email already used"
+                }
+            )
+            return;
+        }
+    } catch (error) {
+        res.status(500).json({});
         return;
     }
+    
 
     if(password == null){
         res.status(400).json(
@@ -69,55 +81,64 @@ app.post('/user/register', async(req, res) => {
         return;
     }
 
-
-    const saved_user = await usersDbModel.saveUser(email,  password, firstName, lastName);
-    if(saved_user == null){
-        res.status(400).json({
-            message: "Failed to save user"
-        });
-        return;
+    try {
+        const saved_user = await usersDbModel.saveUser(email,  password, firstName, lastName);
+        if(saved_user == null){
+            res.status(400).json({
+                message: "Failed to save user"
+            });
+            return;
+        }
+        
+        res.status(200).json(
+                {
+                    firstName: saved_user.first_name,
+                    lastName: saved_user.last_name,
+                    email: saved_user.email
+                }
+            );
+    } catch (error) {
+        res.status(500).json({});
     }
+
     
-    res.status(200).json(
-            {
-                firstName: saved_user.first_name,
-                lastName: saved_user.last_name,
-                email: saved_user.email
-            }
-        );
 })
 
 app.post('/user/login', async(req, res) => {
     const email = req.query.email;
     const password = req.query.password;
 
-    const user = await usersDbModel.getUser(email);
+    try {
+        const user = await usersDbModel.getUser(email);
     
-    if(user == null){
+        if(user == null){
+            res.status(404).json(
+                {
+                    message: "Invalid eamil"
+                }
+            )
+            return;
+        }
+
+        if(await isPasswordValid(user.password, password)){
+            res.status(200).json(
+                {
+                    firstName: user.first_name,
+                    lastName: user.last_name,
+                    email: user.email
+                }
+            )
+            return;
+        }
+
         res.status(404).json(
             {
-                message: "Invalid eamil"
+                message: "Incorrect password"
             }
-        )
-        return;
-    }
-
-    if(await isPasswordValid(user.password, password)){
-        res.status(200).json(
-            {
-                firstName: user.first_name,
-                lastName: user.last_name,
-                email: user.email
-            }
-        )
-        return;
-    }
-
-    res.status(404).json(
-        {
-            message: "Incorrect password"
-        }
     )
+    } catch (error) {
+        res.status(500).json({});
+    }
 })
 
 
