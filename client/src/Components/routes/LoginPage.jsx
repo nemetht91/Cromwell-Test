@@ -1,6 +1,7 @@
 import React from "react";
 import InputBox from "../Form/Inputbox";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function LogInPage(){
 
@@ -8,6 +9,8 @@ function LogInPage(){
         email: "",
         password: ""
     });
+
+    const navigate = useNavigate();
 
     function updateUser(inputName, newValue){
         setUser((preValue) =>{
@@ -28,7 +31,7 @@ function LogInPage(){
                 <div class="divider">
                     <p >or</p>
                 </div>
-                <button type="submit" className="btn">Create an Account</button>
+                <button onClick={() => navigate('/register')} className="btn">Create an Account</button>
               </form>
         </div>
     </div>
