@@ -39,7 +39,7 @@ function LogInPage(){
                 });
                 if(response.status == 200){
                     const userData = await response.json();
-                    user.logInUser(userData.email, userData.firstName, userData.lastName);
+                    user.logInUser(userData.email, userData.token);
                     navigate('/landing')
                 }
                 else{
@@ -65,7 +65,7 @@ function LogInPage(){
                 <InputBox name="email" label="Email" type="text" updateField={updateUser} value={data.email}/>
                 <InputBox name="password" label="Password" type="password" updateField={updateUser} value={data.password}/>
                 <button onClick={handleClick} type="submit" className="btn">Sign In</button>
-                <div class="divider">
+                <div className="divider">
                     <p >or</p>
                 </div>
                 <button onClick={() => navigate('/register')} className="btn">Create an Account</button>

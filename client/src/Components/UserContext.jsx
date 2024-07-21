@@ -3,7 +3,7 @@ import { createContext, useState, useEffect } from "react";
 export const UserContext = createContext({
     user: {},
     isLogedIn: Boolean,
-    getName: () => {},
+    getName: async () => {},
     logInUser: () => {},
     logOutUser: () => {},
 });
@@ -17,18 +17,36 @@ export function UserProvider({children}){
         localStorage.setItem("isLogedIn", JSON.stringify(false));
     },[])
 
-   function getName(){
-        if(user["firstName"] == undefined || user["lastName"] == undefined){
-            return null;
-        }
-        return user["firstName"] + " " + user["lastName"];
-   }
+   async function getName(){
 
-   function logInUser(email, firstName, lastName){
+    var name = "";
+
+        try {
+            const baseURL = process.env.REACT_APP_API_SERVER_URL;
+            const response = await fetch(baseURL+"/user?"+ new URLSearchParams({
+                email: user.email
+            }),{
+                method: 'GET',
+                headers: {
+                    Authorization: "Bearer " + user.token  
+                }
+            });
+            if(response.status == 200){
+                const userData = await response.json();
+                name = userData.firstName + " " + userData.lastName;
+
+            }
+           return name;
+        } catch (error) {
+            return ""; 
+        }
+}
+   
+
+   function logInUser(email, token){
         const newUser = {
             email: email,
-            firstName: firstName,
-            lastName: lastName
+            token: token
         }
         setUser(newUser);
         setIsLogedIn(true);

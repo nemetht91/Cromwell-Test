@@ -5,6 +5,7 @@ import env from "dotenv";
 import bcrypt from "bcrypt";
 import DbConnection from "./database.js";
 import UsersDbModel from "./users_dbModel.js";
+import jsonwebtoken from "jsonwebtoken";
 
 const app = express();
 const port = 5000;
@@ -27,24 +28,33 @@ const saltRounds = 10;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-app.get('/user', async(req, res) => {
+app.get('/user', verifyToken, async(req, res) => {
     const email = req.query.email;
 
     try {
-        const user = await usersDbModel.getUser(email);
-        if(user == null){
-            res.status(404).json({
-                message: "User not found"
-            })
-        }else{
-            res.status(200).json(
-                {
-                    firstName: user.first_name,
-                    lastName: user.last_name,
-                    email: user.email
-                }
-            );
-        }
+        jsonwebtoken.verify(req.token, 'secretkey', async (err, authData) => {
+            if(err) {
+              res.sendStatus(403);
+              return;
+            }
+
+            const user = await usersDbModel.getUser(email);
+            if(user == null){
+                res.status(404).json({
+                    message: "User not found"
+                })
+            }else{
+                res.status(200).json(
+                    {
+                        firstName: user.first_name,
+                        lastName: user.last_name,
+                        email: user.email
+                    }
+                );
+            }
+          });
+    
+
     } catch (error) {
         res.status(500).json({});
     }
@@ -90,13 +100,14 @@ app.post('/user/register', async(req, res) => {
             return;
         }
         
-        res.status(200).json(
-                {
-                    firstName: saved_user.first_name,
-                    lastName: saved_user.last_name,
-                    email: saved_user.email
-                }
-            );
+        jsonwebtoken.sign({saved_user}, 'secretkey', (err, token) => {
+            res.status(200).json({
+              token,
+              email: saved_user.email
+            });
+        });
+
+
     } catch (error) {
         res.status(500).json({});
     }
@@ -122,13 +133,14 @@ app.post('/user/login', async(req, res) => {
         }
 
         if(await isPasswordValid(user.password, password)){
-            res.status(200).json(
-                {
-                    firstName: user.first_name,
-                    lastName: user.last_name,
-                    email: user.email
-                }
-            )
+
+            jsonwebtoken.sign({user}, 'secretkey', (err, token) => {
+                res.status(200).json({
+                  token,
+                  email: user.email
+                });
+            });
+
             return;
         }
 
@@ -138,6 +150,7 @@ app.post('/user/login', async(req, res) => {
             }
     )
     } catch (error) {
+        console.log(error);
         res.status(500).json({});
     }
 })
@@ -162,6 +175,27 @@ async function hashPassword(password){
       return false;    
     }
     
+  }
+
+  // Verify Token
+function verifyToken(req, res, next) {
+    // Get auth header value
+    const bearerHeader = req.headers['authorization'];
+    // Check if bearer is undefined
+    if(typeof bearerHeader !== 'undefined') {
+      // Split at the space
+      const bearer = bearerHeader.split(' ');
+      // Get token from array
+      const bearerToken = bearer[1];
+      // Set the token
+      req.token = bearerToken;
+      // Next middleware
+      next();
+    } else {
+      // Forbidden
+      res.sendStatus(403);
+    }
+  
   }
 
 app.listen(port, () => {

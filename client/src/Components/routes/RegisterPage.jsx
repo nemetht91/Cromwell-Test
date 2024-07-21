@@ -67,7 +67,7 @@ function RegisterPage(){
     }
 
     function isEmailValid(){
-        return data.email.includes('a') && data.email.includes('.');
+        return data.email.includes('@') && data.email.includes('.');
     }
 
     function isPasswordValid(){
@@ -89,7 +89,7 @@ function RegisterPage(){
                 });
                 if(response.status == 200){
                     const userData = await response.json();
-                    user.logInUser(userData.email, userData.firstName, userData.lastName);
+                    user.logInUser(userData.email, userData.token);
                     navigate('/landing')
                 }
                 else{
