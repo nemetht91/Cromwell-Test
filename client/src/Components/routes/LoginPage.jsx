@@ -60,7 +60,7 @@ function LogInPage(){
     return <div className="login page">
         {errors.length > 0 && <ErrorMessages messages={errors}/>}
         <div className="card">
-            <h2>Create Acount</h2>
+            <h2>Sign In</h2>
             <form >
                 <InputBox name="email" label="Email" type="text" updateField={updateUser} value={data.email}/>
                 <InputBox name="password" label="Password" type="password" updateField={updateUser} value={data.password}/>
