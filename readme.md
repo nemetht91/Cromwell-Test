@@ -40,7 +40,7 @@ A simple Node.js and React.js application for user login and registration proces
 Contributors names and contact info
 
 ex. Tamas Nemeth
-ex. [[@DomPizzie](https://twitter.com/dompizzie)](https://www.tnemeth.co.uk/)
+ex. (https://twitter.com/dompizzie)](https://www.tnemeth.co.uk/)
 
 ## Version History
 
