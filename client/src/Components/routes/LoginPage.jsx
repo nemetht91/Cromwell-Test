@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../UserContext";
+import ErrorMessages from "../ErrorMessage";
 
 function LogInPage(){
 
@@ -11,6 +12,7 @@ function LogInPage(){
         email: "",
         password: ""
     });
+    const [errors, setErrors] = useState([]);
 
     const navigate = useNavigate();
     const user = useContext(UserContext);
@@ -43,10 +45,11 @@ function LogInPage(){
                 }
                 else{
                     const error = await response.json();
-                    console.log(error);
+                    setErrors([error.message]);
                 }
             } catch (error) {
-                console.log(error);
+                setErrors(["Internal Error. Try again Later!"]);
+                
             }
         }
         event.preventDefault();
@@ -56,6 +59,7 @@ function LogInPage(){
 
 
     return <div className="login page">
+        {errors.length > 0 && <ErrorMessages messages={errors}/>}
         <div className="card">
             <h2>Create Acount</h2>
             <form >
