@@ -53,7 +53,7 @@ function RegisterPage(){
 
         if(!isPasswordValid()){
             isValid = false;
-            errorMessages.push("Password must be at least 8 characther long");
+            errorMessages.push("Password must be at least 8 characthers long");
         }
 
         if(data.password != data.confirmPassword){
