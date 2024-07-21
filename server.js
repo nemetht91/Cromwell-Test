@@ -115,7 +115,7 @@ app.post('/user/login', async(req, res) => {
         if(user == null){
             res.status(404).json(
                 {
-                    message: "Invalid eamil"
+                    message: "Invalid email"
                 }
             )
             return;
