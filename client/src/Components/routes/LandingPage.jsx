@@ -15,7 +15,7 @@ function LandingPage(){
     }, [])
 
     return <div className="landing page">
-        <h1>This is the Landing page</h1>
+        <h1>Welcome!</h1>
         <h2>{user.getName()}</h2>
         <h2>{user.user.email}</h2>
     </div>
