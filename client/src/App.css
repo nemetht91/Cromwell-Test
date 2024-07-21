@@ -195,6 +195,11 @@ a.btn:hover{
   font-size: 30px;
 }
 
+a.image_ref{
+  font-size: 12px;
+  color: white;
+}
+
 @media(max-width: 1400px){
   .navbar .container{
     margin: 0px 20px;
