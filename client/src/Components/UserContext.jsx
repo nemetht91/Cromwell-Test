@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const UserContext = createContext({
     user: {},
@@ -11,7 +11,11 @@ export const UserContext = createContext({
 export function UserProvider({children}){
 
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-    const [isLogedIn, setIsLogedIn] = useState(false);
+    const [isLogedIn, setIsLogedIn] = useState(JSON.parse(localStorage.getItem("isLogedIn")));
+
+    useEffect(() => {
+        localStorage.setItem("isLogedIn", JSON.stringify(false));
+    },[])
 
    function getName(){
         if(user["firstName"] == undefined || user["lastName"] == undefined){
@@ -29,12 +33,15 @@ export function UserProvider({children}){
         setUser(newUser);
         setIsLogedIn(true);
         localStorage.setItem("user", JSON.stringify(newUser));
+        localStorage.setItem("isLogedIn", JSON.stringify(true));
+
    }
 
    function logOutUser(){
         setUser({});
         setIsLogedIn(false);
         localStorage.setItem("user", JSON.stringify({}));
+        localStorage.setItem("isLogedIn", JSON.stringify(false));
    }
 
    const contextValue ={
@@ -46,9 +53,9 @@ export function UserProvider({children}){
    }
 
    return (
-    <ProductsContext.Provider value={contextValue}>
+    <UserContext.Provider value={contextValue}>
         {children}
-    </ProductsContext.Provider>
+    </UserContext.Provider>
 )
 
 }
