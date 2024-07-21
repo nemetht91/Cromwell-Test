@@ -7,7 +7,7 @@ function Logo(props){
         props.navigate();
     }
 
-    return <h2 onClick={handleClick} className="logo">Cromwell Test</h2>
+    return <h2 onClick={handleClick} className="logo">C<span>romwell </span>T<span>est</span></h2>
 }
 
 export default Logo;

@@ -28,6 +28,7 @@ body{
   background-size: cover;
   background-color: rgba(255, 255, 255, 0.7);
   background-blend-mode: lighten;
+  color: var(--secondary-color);
 }
 
 
@@ -93,12 +94,6 @@ footer a:hover{
 
 .login ,
 .register{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
-   padding-top: 150px;
    text-align: left;
 }
 
@@ -185,8 +180,7 @@ a.btn:hover{
 
 /* Homepage */
 
-.home,
-.landing{
+.page{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -199,4 +193,38 @@ a.btn:hover{
   text-decoration: none;
   color: var(--primary-color);
   font-size: 30px;
+}
+
+@media(max-width: 1400px){
+  .navbar .container{
+    margin: 0px 20px;
+  }
+
+}
+
+@media(max-width: 700px){
+  .logo span{
+    display: none;
+  }
+
+  h1{
+    font-size: 30px;
+  }
+
+  h2{
+    font-size: 18px;
+  }
+
+  .errors{
+    padding: 10px;
+  }
+
+  .errors h2{
+    font-size: 12px;
+  }
+
+  .errors li{
+    font-size: 10px;
+  }
+
 }
