@@ -1,62 +1,48 @@
 # Project Title
 
-Simple overview of use/purpose.
+Test Project for Junior Full Stack Deceloper Role at Cromwell.
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+A simple Node.js and React.js application for user login and registration process.
 
 ## Getting Started
 
-### Dependencies
-
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
-
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+1. Clone the repo
+   git clone https://github.com/your_username_/Project-Name.git](https://github.com/nemetht91/Cromwell-Test
+2. Install NPM packages
+   npm install
+3. Create a PostgreSQL database
+   run db/user_table_script.sql script in PgAdmin
+4. Create .env file in the project folder and add the following variables:
+   PG_USER: database user
+   PG_HOST: database host
+   PG_DATABASE: database name
+   PG_PASSWORD: database password
+   PG_PORT: database port
+   PG_SSL: SSL connection - true/false
+6. Create .env file in the client folder add the following variable:
+   REACT_APP_API_SERVER_URL: your server's url example: "http://localhost:5000"
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
-```
-code blocks for commands
-```
-
-## Help
-
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
+1. Start server:
+  - open terminal and navigate to source folder
+  - npm start
+2. Start client:
+   - open a new terminale and navigate to client folder
+   - npm start
 
 ## Authors
 
 Contributors names and contact info
 
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
+ex. Tamas Nemeth
+ex. [[@DomPizzie](https://twitter.com/dompizzie)](https://www.tnemeth.co.uk/)
 
 ## Version History
 
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
 * 0.1
     * Initial Release
-
-## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
-
-## Acknowledgments
-
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
