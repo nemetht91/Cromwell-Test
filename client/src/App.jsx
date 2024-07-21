@@ -9,6 +9,7 @@ import HomePage from './Components/routes/HomePage'
 import LogInPage from './Components/routes/LoginPage'
 import RegisterPage from './Components/routes/RegisterPage'
 import LandingPage from './Components/routes/LandingPage'
+import UserProvider from './Components/UserContext';
 
 
 
@@ -16,13 +17,15 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
-        <Routes>
-              <Route path="/" element={<HomePage/>} />
-              <Route path="/login" element={<LogInPage/>} />
-              <Route path="/register" element={<RegisterPage/>} />
-              <Route path="/landing" element={<LandingPage/>} />
-          </Routes>
+        <UserProvider>
+          <Navbar />
+          <Routes>
+                <Route path="/" element={<HomePage/>} />
+                <Route path="/login" element={<LogInPage/>} />
+                <Route path="/register" element={<RegisterPage/>} />
+                <Route path="/landing" element={<LandingPage/>} />
+            </Routes>
+        </UserProvider>
         <Footer/>
       </BrowserRouter>
     </div>
