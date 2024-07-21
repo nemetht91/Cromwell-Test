@@ -108,6 +108,7 @@ app.post('/user/login', async(req, res) => {
     const email = req.query.email;
     const password = req.query.password;
 
+
     try {
         const user = await usersDbModel.getUser(email);
     
