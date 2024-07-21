@@ -47,6 +47,11 @@
   cursor: pointer;
 }
 
+.navbar .buttons{
+  display: flex;
+  gap: 20px;
+}
+
 
 /* footer */
 footer{
