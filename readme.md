@@ -11,7 +11,7 @@ A simple Node.js and React.js application for user login and registration proces
 ### Installing
 
 1. Clone the repo
-   git clone https://github.com/your_username_/Project-Name.git](https://github.com/nemetht91/Cromwell-Test
+   git clone https://github.com/nemetht91/Cromwell-Test
 2. Install NPM packages
    npm install
 3. Create a PostgreSQL database
