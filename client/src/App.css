@@ -151,3 +151,21 @@ a.btn:hover{
   background-color: black;
   margin: 7.5px;
 }
+
+/* Error messages */
+.errors{
+  border: red solid 1px;
+  padding: 20px;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.errors h2{
+  color: red;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.errors li{
+  margin-left: 30px;
+}
