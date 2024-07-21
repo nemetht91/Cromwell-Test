@@ -29,7 +29,6 @@ function LogInPage(){
     function handleClick(event){
         const logIn = async () => {
             const baseURL = process.env.REACT_APP_API_SERVER_URL;
-            console.log(baseURL)
             try {
                 const response = await fetch(baseURL+"/user/login?"+ new URLSearchParams({
                     email: data.email,
