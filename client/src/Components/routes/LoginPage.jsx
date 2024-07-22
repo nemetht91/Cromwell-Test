@@ -1,6 +1,6 @@
 import React from "react";
 import InputBox from "../Form/Inputbox";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../UserContext";
@@ -16,6 +16,12 @@ function LogInPage(){
 
     const navigate = useNavigate();
     const user = useContext(UserContext);
+
+    useEffect(() => {
+        if(user.isLogedIn){
+            navigate('/');
+        }
+    }, [])
 
     function updateUser(inputName, newValue){
         setData((preValue) =>{

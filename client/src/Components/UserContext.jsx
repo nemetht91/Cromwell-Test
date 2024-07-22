@@ -13,9 +13,7 @@ export function UserProvider({children}){
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
     const [isLogedIn, setIsLogedIn] = useState(JSON.parse(localStorage.getItem("isLogedIn")));
 
-    useEffect(() => {
-        localStorage.setItem("isLogedIn", JSON.stringify(false));
-    },[])
+   
 
    async function getName(){
 
